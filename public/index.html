@@ -1,0 +1,40 @@
+<html lang="en">
+<body>
+
+<label for="email">
+    Email
+    <input id="email" type="email">
+</label>
+<label for="password">
+    Password
+    <input id="password" type="password">
+</label>
+
+<label for="password">
+    Password
+    <input type="button" onclick="do_login()" value="Login">
+</label>
+
+<script type="text/javascript">
+    function do_login()
+    {
+        console.log("starting login")
+
+        let email = document.getElementById("email").value
+        let password = document.getElementById("password").value
+
+        console.log("i see email="+email+" and password="+password)
+
+        fetch("/login", {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, password})
+        }).then(response => response.json())
+            .then(data => {
+            console.log("Request complete! response:", data);
+        });
+
+    }
+</script>
+</body>
+</html>
